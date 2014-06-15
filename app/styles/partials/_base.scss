@@ -1,0 +1,38 @@
+/*********************
+
+	VARIABLES
+
+***********/
+
+$navbar-offset: 250px;
+
+$mobile-break: 860px;
+
+$wide-break: 1400px;
+
+$ultrawide-break: 1600px;
+
+
+
+
+
+/********************
+
+	MIXINS
+
+***********/
+
+@mixin parallax {
+	background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	@media screen and (min-width: 1400px) {
+		background-position-x: 250px;
+	}
+
+	@media screen and (min-width: 1400px) {
+		background-position-x: $navbar-offset + 50;
+	}
+
+}

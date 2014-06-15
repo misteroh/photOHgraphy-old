@@ -1,0 +1,44 @@
+.banner {
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	opacity: 1;
+
+	@media screen and (min-width: $mobile-break) {
+		width: 100%;
+		position: static;
+		z-index: 1;
+	}
+
+	@media screen and (min-width: 1400px) {
+
+	}
+
+	img {
+		transition: opacity 1s linear;
+		-moz-transition: opacity 1s;
+		-webkit-transition: opacity 1s;
+		transition: width opacity 1s;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		display: block;
+		margin: 1.5em auto;
+
+		@media screen and (min-width: 1800px) {
+			max-width: 1800px;
+		}
+	}
+
+	img.active {
+		filter: unquote("filter: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale')");
+		filter: none; /* IE6-9 */
+		-webkit-filter: grayscale(0%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+		opacity: 1;
+		transition: opacity 1s linear;
+		-moz-transition: opacity 1s;
+		-webkit-transition: opacity 1s;
+		transition: opacity 1s;
+	}
+}

@@ -1,0 +1,130 @@
+body {
+	background: #000;
+	font-family: Arial, sans-serif;
+}
+
+#content-wrapper {
+	margin: 0 auto;
+	height: 100%;
+}
+
+section {
+	padding: 0;
+	margin: 0 auto 0;
+
+	.section-wrapper {
+		opacity: 0;
+		transition: opacity .5s linear;
+		-moz-transition: opacity .5s linear;
+		-webkit-transition: opacity .5s linear;
+	}
+
+	&.live {
+		.section-wrapper {
+			opacity: 1;
+			transition: opacity .5s linear;
+			-moz-transition: opacity .5s linear;
+			-webkit-transition: opacity .5s linear;
+		}
+	}
+}
+
+#action {
+	background-image: url("../images/action1.jpg");
+	@include parallax;
+}
+
+#music {
+	background-image: url("../images/music1.jpg");
+	@include parallax;
+}
+
+#people {
+	background-image: url("../images/people1.jpg");
+	@include parallax;
+}
+
+#landscape {
+	background-image: url("../images/landscape1.jpg");
+	@include parallax;
+}
+
+#about-me {
+	background-image: url("../images/about-me.jpg");
+	@include parallax;
+}
+.slides {
+	list-style: none;
+	padding: 0;
+	-webkit-overflow-scrolling: touch;
+
+	@media screen and (min-width: $mobile-break) {
+		margin: 0 auto;
+	}
+
+	li {
+		display: block;
+		width: 50%;
+		float: left;
+		overflow: hidden;
+
+		@media screen and (min-width: 550px) {
+			width: 33.33%;
+		}
+
+		@media screen and (min-width: $mobile-break) {
+			float: left;
+			overflow: hidden;
+			list-style: none;
+		}
+
+		@media screen and (min-width: 1100px) {
+			width: 25%;
+		}
+
+		@media screen and (min-width: 1300px) {
+			width: 20%;
+		}
+
+		@media screen and (min-width: 1600px) {
+			width: 16.66%;
+		}
+
+		a {
+			max-width: 100%;
+		}
+
+		img {
+			width: 100%;
+			-webkit-filter: grayscale(100%);
+			opacity: .9;
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-webkit-transition : opacity .5s linear, -webkit-filter 500ms linear;
+
+			@media screen and (min-width: $mobile-break) {
+				backface-visibility: hidden;
+				-webkit-backface-visibility: hidden;
+				-moz-backface-visibility: hidden;
+				-ms-backface-visibility: hidden;
+
+
+				&:hover {
+					filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+					filter: none; /* IE6-9 */
+					-webkit-filter: grayscale(0%);
+					opacity: 1;
+					transition: opacity .5s linear;
+					-moz-transition: opacity .5s linear;
+					-webkit-transition : opacity .5s linear, -webkit-filter 500ms linear;
+				}
+			}
+		}
+	}
+}
+
+#back-to-top {
+	text-align: center;
+}
