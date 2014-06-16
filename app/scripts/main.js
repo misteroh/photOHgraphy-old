@@ -11,7 +11,8 @@ jQuery(function ($) {
         $categories = $('section'),
         $content = $('#content-wrapper'),
         $footer = $('footer'),
-        $htmlBody = ('html, body');
+        $htmlBody = ('html, body'),
+        jsonList = ['action', 'music', 'people', 'landscape'];
 
     function loadScreen() {
         $('#splash').fadeOut();
@@ -144,19 +145,6 @@ jQuery(function ($) {
                     result = tmp(data);
                 $(ele).html(result);
 
-                if (id == 'active-challenges-template') {
-                    $('#more-active-challenges').click(function () {
-                        $(ele).append(result);
-                    });
-                }
-
-                if (id == 'past-challenges-template') {
-                    $('#more-past-challenges').click(function () {
-                        console.log(ele);
-                        $(ele).append(result);
-                    });
-                }
-
                 coordsUpdate();
                 loadScreen();
                 sectionCounter();
@@ -166,9 +154,13 @@ jQuery(function ($) {
         }
     };
 
-    GlAshCo.startTemplate('scripts/json/images.json', 'js-template/images-template.hbs', 'action');
+    for (var i in jsonList) {
+        console.log(i)
+        GlAshCo.startTemplate('scripts/json/' + jsonList[i] +'.json', 'js-template/images-template.hbs', jsonList[i]);
+    }
 
-    $(window).on('load orientationchange resize', function() {
+
+    $(window).on('orientationchange resize', function() {
         coordsUpdate();
         loadScreen();
         sectionCounter();
