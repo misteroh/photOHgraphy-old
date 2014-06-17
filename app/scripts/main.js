@@ -34,7 +34,6 @@ jQuery(function ($) {
                 if (currentLoc > secTops[i] && currentLoc < secTops[i+1]) {
                     section = i;
                     break;
-
                 } else {
                     section = i;
                 }
