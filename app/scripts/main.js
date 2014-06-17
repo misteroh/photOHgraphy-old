@@ -112,7 +112,7 @@ jQuery(function ($) {
     */
 
     //handlebar
-    var GlAshCo = {
+    var $hbs = {
         startTemplate: function (source, template, id, callback) {
             var obj = {};
 
@@ -128,16 +128,16 @@ jQuery(function ($) {
             ).then(
                 //success
                 function () {
-                    GlAshCo.renderTemplate(obj.template, obj.data, id, true, callback);
+                    $hbs.renderTemplate(obj.template, obj.data, id, true, callback);
                 },
                 //fail
                 function () {
-                    GlAshCo.renderTemplate(obj.template, obj.data, id, false);
+                    $hbs.renderTemplate(obj.template, obj.data, id, false);
                 }
             );
         },
 
-        renderTemplate: function (templateHtml, data, id, isSuccess, callback) {
+        renderTemplate: function (templateHtml, data, id, isSuccess) {
             var ele = document.getElementById(id);
             //if get json and get template are successful
             if (isSuccess) {
@@ -145,20 +145,21 @@ jQuery(function ($) {
                     result = tmp(data);
                 $(ele).html(result);
 
-                coordsUpdate();
-                loadScreen();
-                sectionCounter();
+                if (id === jsonList[jsonList.length-1]) {
+                    coordsUpdate();
+                    sectionCounter();
+                    loadScreen();
+                }
+
             } else {
-                $(ele).html('Sorry, an error occured. Please try again or contact us.');
+                $(ele).html('Sorry, an error occured. Please refresh to page to try again. If the error persists, please contact me at <a href="mailto:me@andrewoh.co">me@andrewoh.co</a>');
             }
         }
     };
 
     for (var i in jsonList) {
-        console.log(i)
-        GlAshCo.startTemplate('scripts/json/' + jsonList[i] +'.json', 'js-template/images-template.hbs', jsonList[i]);
+            $hbs.startTemplate('scripts/json/' + jsonList[i] +'.json', 'js-template/images-template.hbs', jsonList[i]);
     }
-
 
     $(window).on('orientationchange resize', function() {
         coordsUpdate();

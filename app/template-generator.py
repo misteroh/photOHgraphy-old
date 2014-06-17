@@ -22,7 +22,7 @@ for i in photoTargets:
         photoList.append(os.path.basename(k))
     photoList.sort(key=tokenize)
     print (os.path.join('scripts/json', i + '.txt'))
-    file = open(os.path.join('scripts/json', i + '.json'), 'w')
+    file = open(os.path.join('scripts/json/draft', i + '.json'), 'w')
     file.write('''{
     "category" : "''' + i + '''",
 
