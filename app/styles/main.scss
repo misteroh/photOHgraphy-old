@@ -2,7 +2,7 @@
 
 @import "partials/base";
 
-@import "partials/vendor/swipebox";
+@import "../bower_components/photoswipe/src/css/main.scss";
 
 @import "partials/header";
 
@@ -17,4 +17,3 @@
 @import "partials/navbar";
 
 @import "partials/footer";
-

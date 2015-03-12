@@ -15,14 +15,8 @@
 	}
 
 	img {
-		transition: opacity 1s linear;
-		-moz-transition: opacity 1s;
-		-webkit-transition: opacity 1s;
-		transition: width opacity 1s;
+		transition: all opacity 1s;
 		backface-visibility: hidden;
-		-webkit-backface-visibility: hidden;
-		-moz-backface-visibility: hidden;
-		-ms-backface-visibility: hidden;
 		display: block;
 		margin: 1.5em auto;
 
