@@ -9,7 +9,8 @@
         currentLoc,
         section,
         mobileView = 860,
-        $nav = $('nav'),
+        window,
+        nav,
         $categories = $('section'),
         $content = $('#content-wrapper'),
         $footer = $('footer'),
@@ -17,10 +18,11 @@
         jsonList = ['action', 'music', 'people', 'landscape'];
 
     function loadScreen() {
-            $('#splash').fadeOut();
-         $('body').fadeIn(400, function() {
+        $('#splash').fadeOut();
 
-         });
+        $('body').fadeIn(400, function() {
+
+        });
     }
 
     function coordsUpdate() {
@@ -98,12 +100,14 @@
         }
     }
 
-    function navInit() {
-        $nav.on('click', 'a', function() { // bring user to specific section if clicked on in the main navbar
-            $nav.find('a.active').removeClass('active');
-            var targetHeight = $($(this).attr('href')).offset().top;
-            $($htmlBody).stop(true, true).animate({scrollTop: targetHeight},800);
-            //return false;
+    function navInit(nav) {
+        nav.find('a').on('click.navChange', function() {
+            var obj = $(this),
+                target = $(obj.attr('href')),
+                targetHeight = target.offset().top;
+
+            nav.find('.active').removeClass('active');
+            $($htmlBody).stop(true, true).animate({scrollTop: targetHeight}, 800);
         });
     }
 
@@ -136,6 +140,8 @@
     }
 
     $( document ).ready(function() {
+        $window = $(window);
+        nav = $('nav');
 
         (function initHandlebars() {
             var categories = $('section.category'),
@@ -153,7 +159,9 @@
                             json: json,
                             target: obj,
                             callback: function() {
-
+                                if (i === numberOfCategories - 1) {
+                                    navInit();
+                                }
                             }
                         });
                     });
@@ -161,34 +169,12 @@
             });
         })();
 
-        //var $hbs = {
-        //    renderTemplate: function (templateHtml, data, id, isSuccess) {
-        //        var ele = document.getElementById(id);
-        //        //if get json and get template are successful
-        //        if (isSuccess) {
-        //            var tmp = Handlebars.compile(templateHtml),
-        //                result = tmp(data);
-        //            $(ele).html(result);
-        //
-        //            if (id === jsonList[jsonList.length-1]) {
-        //                coordsUpdate();
-        //                sectionCounter();
-        //                loadScreen();
-        //            }
-        //
-        //        } else {
-        //            $(ele).html('Sorry, an error occured. Please refresh to page to try again. If the error persists, please contact me at <a href="mailto:me@andrewoh.co">me@andrewoh.co</a>');
-        //        }
-        //    }
-        //};
-
-
-        $(window).on('orientationchange resize', function() {
+        $window.on('orientationchange resize', function() {
             coordsUpdate();
             sectionCounter();
         });
-        $(window).on('scroll', sectionCounter);
-        $(window).on('load', function() {
+        $window.on('scroll', sectionCounter);
+        $window.on('load', function() {
             loadScreen();
         })
     });
