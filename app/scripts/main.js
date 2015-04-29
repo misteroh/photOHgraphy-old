@@ -10,11 +10,11 @@
         currentLoc,
         section,
         mobileView = 860,
-        window,
+        $window = $(window),
         nav,
         $categories = $('section'),
         $content = $('#content-wrapper'),
-        $footer = $('footer'),
+        footer,
         $htmlBody = ('html, body'),
         jsonList = ['action', 'music', 'people', 'landscape'];
 
@@ -56,19 +56,19 @@
 	function navAdjust(section) { //fix the navbar to the top and highlight the correct section in the navbar or fix the section header to top if using mobile viewport.
 		if ($(window).width() >= mobileView) {
 			if ($(window).scrollTop() >= navFix) {
-				$nav.addClass('fixed');
+                nav.addClass('fixed');
 			} else {
-				$nav.removeClass('fixed');
+                nav.removeClass('fixed');
 			}
 
 			if (section >= 0 && section <= 6) {
-				$nav.find('a.active').removeClass('active');
-				$nav.find('a:eq(' + section + ')').addClass('active');
+                nav.find('a.active').removeClass('active');
+                nav.find('a:eq(' + section + ')').addClass('active');
 				$('img.active').removeClass('active');
 				//$($categories[section]).find('.banner img').addClass('active');
 			}
 			else { //unfix navbar if user is on top of page or at bottom
-				$nav.find('a.active').removeClass('active');
+                nav.find('a.active').removeClass('active');
 			}
 		}
 
@@ -77,7 +77,7 @@
 				$content.find('.top-fix').removeClass('top-fix').removeClass('top-fix');
 			}
 			else {
-				$nav.removeClass('fixed');
+                nav.removeClass('fixed');
 			}
 		}
 	}
@@ -94,7 +94,8 @@
 
 
 	function sectionCounter() { // counts which section the user is on based on scrollTop position
-		currentLoc = $(window).scrollTop();
+		var currentLoc = $(window).scrollTop();
+
 		if (currentLoc > secTops[0] && currentLoc < $footer.offset().top) {
 			for (var i = 0; i < secTops.length; i++) {
 				if (currentLoc > secTops[i] && currentLoc < secTops[i+1]) {
@@ -107,6 +108,8 @@
 		} else {
 			section = -1;
 		}
+
+        console.log(section);
 
 		navAdjust(section);
 		fadeIn(section);
@@ -169,8 +172,8 @@
     }
 
     $(document).ready(function() {
-        window = $(window);
         nav = $('nav');
+        footer = $('footer');
 
         (function initHandlebars() {
             var categories = $('section.category'),
@@ -200,17 +203,17 @@
             });
         })();
 
-        window.on('orientationchange resize', function() {
+        $window.on('load', function() {
+            loadScreen();
+        });
+
+        $window.on('orientationchange resize', function() {
             coordsUpdate();
             sectionCounter();
         });
 
-        window.on('scroll', function(){
+        $window.on('scroll', function(){
 			sectionCounter();
 		});
-
-        window.on('load', function() {
-            loadScreen();
-        })
     });
 })();
