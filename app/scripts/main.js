@@ -4,26 +4,26 @@
     //var global = {
     //    handlebarsTemplateUrl: '../js-template/images-template.hbs'
     //};
-    var secTops = [],
+    var secCoords = [],
         navFix,
         offset = 400,
         currentLoc,
         section,
         mobileView = 860,
         $window = $(window),
+        $htmlBody = ('html, body'),
         nav,
         $categories = $('section'),
         $content = $('#content-wrapper'),
         footer,
-        $htmlBody = ('html, body'),
         jsonList = ['action', 'music', 'people', 'landscape'];
 
     function loadScreen() {
-        $('#splash').fadeOut();
-
-        $('body').fadeIn(400, function() {
-
-        });
+        //$('#splash').fadeOut();
+        //
+        //$('body').fadeIn(400, function() {
+        //
+        //});
     }
 
     function fadeIn(section) {
@@ -43,11 +43,12 @@
     }
 
     function navLinkInit() {
-        nav.find('a').on('click.navChange', function() {
+        nav.find('a').on('click.navChange', function(e) {
             var obj = $(this),
                 target = $(obj.attr('href')),
                 targetHeight = target.offset().top;
 
+            e.preventDefault();
             nav.find('.active').removeClass('active');
             $($htmlBody).stop(true, true).animate({scrollTop: targetHeight}, 800);
         });
@@ -55,7 +56,7 @@
 
 	function navAdjust(section) { //fix the navbar to the top and highlight the correct section in the navbar or fix the section header to top if using mobile viewport.
 		if ($(window).width() >= mobileView) {
-			if ($(window).scrollTop() >= navFix) {
+			if ($(window).scrollTop() >= secCoords[0]) {
                 nav.addClass('fixed');
 			} else {
                 nav.removeClass('fixed');
@@ -73,7 +74,7 @@
 		}
 
 		else {
-			if ($(window).scrollTop() >= secTops[0]) { //don't want the navbar on top if using mobile viewport
+			if ($(window).scrollTop() >= secCoords[0]) { //don't want the navbar on top if using mobile viewport
 				$content.find('.top-fix').removeClass('top-fix').removeClass('top-fix');
 			}
 			else {
@@ -85,20 +86,20 @@
 	function coordsUpdate() {
 		var navFix;
 
-		secTops.length = 0;
+		secCoords.length = 0;
 		$categories.each(function() {
-			secTops.push($(this).offset().top - offset);
+			secCoords.push($(this).offset().top - offset);
 		});
-		navFix = secTops[0] + offset;
+		navFix = secCoords[0] + offset;
 	}
 
 
 	function sectionCounter() { // counts which section the user is on based on scrollTop position
 		var currentLoc = $(window).scrollTop();
 
-		if (currentLoc > secTops[0] && currentLoc < $footer.offset().top) {
-			for (var i = 0; i < secTops.length; i++) {
-				if (currentLoc > secTops[i] && currentLoc < secTops[i+1]) {
+		if (currentLoc > secCoords[0] && currentLoc < footer.offset().top) {
+			for (var i = 0; i < secCoords.length; i++) {
+				if (currentLoc > secCoords[i] && currentLoc < secCoords[i+1]) {
 					section = i;
 					break;
 				} else {
@@ -135,7 +136,7 @@
 		}
 
 		else {
-			if ($(window).scrollTop() >= secTops[0]) { //don't want the navbar on top if using mobile viewport
+			if ($(window).scrollTop() >= secCoords[0]) { //don't want the navbar on top if using mobile viewport
 				$content.find('.top-fix').removeClass('top-fix').removeClass('top-fix');
 			}
 			else {

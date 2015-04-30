@@ -30,7 +30,7 @@ gulp.task('watchSASS', function () {
             folder = psia[psia.indexOf('app_themes') + 1],
             src;
 
-        gulp.src('app/styles/**/*.scss', { base: 'App_Themes/' })
+        gulp.src('app/styles/**/*.scss')
         .pipe($.plumber())
         .pipe($.sourcemaps.init())
         .pipe($.sass({
@@ -44,7 +44,7 @@ gulp.task('watchSASS', function () {
             cascade: true
         }))
         .pipe($.sourcemaps.write('./'))
-        .pipe(gulp.dest('app/styles'))
+        .pipe(gulp.dest('app/styles/'))
         .pipe($.livereload({
             quiet: true
         }));

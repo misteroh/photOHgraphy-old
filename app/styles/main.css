@@ -182,8 +182,6 @@ input[type="checkbox"], input[type="radio"] {
 
 input[type="search"] {
   -webkit-appearance: textfield;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   box-sizing: content-box; }
 
 input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button {
@@ -217,8 +215,7 @@ td {
 .clear {
   clear: both; }
 
-.clearfix:before,
-.clearfix:after {
+.clearfix:before, .clearfix:after {
   content: " ";
   /* 1 */
   display: table;
@@ -244,191 +241,197 @@ td {
 	MIXINS
 
 ***********/
-/*! Swipebox v1.2.8 | Constantin Saguin csag.co | MIT License | github.com/brutaldesign/swipebox */
-html.swipebox-html.swipebox-touch {
-  overflow: hidden !important; }
-
-#swipebox-overlay img {
-  border: none !important; }
-
-#swipebox-overlay {
+/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */
+/*
+	Styles for basic PhotoSwipe functionality (sliding area, open/close transitions)
+*/
+/* pswp = photoswipe */
+.pswp {
+  display: none;
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: fixed;
-  top: 0;
   left: 0;
-  z-index: 99999 !important;
+  top: 0;
   overflow: hidden;
-  user-select: none; }
+  -ms-touch-action: none;
+  touch-action: none;
+  z-index: 1500;
+  -webkit-text-size-adjust: 100%;
+  /* create separate layer, to avoid paint on window.onscroll in webkit/blink */
+  -webkit-backface-visibility: hidden;
+  outline: none; }
+  .pswp * {
+    box-sizing: border-box; }
+  .pswp img {
+    max-width: none; }
 
-#swipebox-slider {
-  height: 100%;
+/* style is added when JS option showHideOpacity is set to true */
+.pswp--animate_opacity {
+  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */
+  opacity: 0.001;
+  will-change: opacity;
+  /* for open/close transition */
+  transition: opacity 333ms cubic-bezier(.4, 0, .22, 1); }
+
+.pswp--open {
+  display: block; }
+
+.pswp--zoom-allowed .pswp__img {
+  /* autoprefixer: off */
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in; }
+
+.pswp--zoomed-in .pswp__img {
+  /* autoprefixer: off */
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab; }
+
+.pswp--dragging .pswp__img {
+  /* autoprefixer: off */
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing; }
+
+/*
+	Background is added as a separate element.
+	As animating opacity is much faster than animating rgba() background-color.
+*/
+.pswp__bg {
+  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  white-space: nowrap;
-  position: absolute;
-  display: none; }
-  #swipebox-slider .slide {
-    background: url(../images/sprites/loader.gif) no-repeat center center;
-    height: 100%;
-    width: 100%;
-    line-height: 1px;
-    text-align: center;
-    display: inline-block; }
-    #swipebox-slider .slide:before {
-      content: "";
-      display: inline-block;
-      height: 50%;
-      width: 1px;
-      margin-right: -1px; }
-    #swipebox-slider .slide img, #swipebox-slider .slide .swipebox-video-container {
-      display: inline-block;
-      max-height: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-      width: auto;
-      height: auto;
-      vertical-align: middle; }
-    #swipebox-slider .slide .swipebox-video-container {
-      background: none;
-      max-width: 1140px;
-      max-height: 100%;
-      width: 100%;
-      padding: 5%;
-      box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box; }
-      #swipebox-slider .slide .swipebox-video-container .swipebox-video {
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%;
-        overflow: hidden;
-        position: relative; }
-        #swipebox-slider .slide .swipebox-video-container .swipebox-video iframe {
-          width: 100% !important;
-          height: 100% !important;
-          position: absolute;
-          top: 0;
-          left: 0; }
-
-#swipebox-action,
-#swipebox-caption {
-  position: absolute;
-  left: 0;
-  z-index: 999;
-  height: 50px;
-  width: 100%; }
-
-#swipebox-action {
-  bottom: -50px; }
-  #swipebox-action.visible-bars {
-    -moz-transform: translateY(-50px);
-    -ms-transform: translateY(-50px);
-    -webkit-transform: translateY(-50px);
-    transform: translateY(-50px); }
-  #swipebox-action #swipebox-prev,
-  #swipebox-action #swipebox-next,
-  #swipebox-action #swipebox-close {
-    background-image: url(../images/sprites/icons.png);
-    background-repeat: no-repeat;
-    border: none !important;
-    text-decoration: none !important;
-    cursor: pointer;
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 0; }
-  #swipebox-action #swipebox-prev {
-    background-position: -32px 13px;
-    right: 100px; }
-  #swipebox-action #swipebox-next {
-    background-position: -78px 13px;
-    right: 40px; }
-  #swipebox-action #swipebox-close {
-    background-position: 15px 12px;
-    left: 40px; }
-  #swipebox-action #swipebox-prev.disabled,
-  #swipebox-action #swipebox-next.disabled {
-    opacity: 0.3; }
-
-#swipebox-caption {
-  top: -50px;
-  text-align: center; }
-  #swipebox-caption.visible-bars {
-    -moz-transform: translateY(50px);
-    -ms-transform: translateY(50px);
-    -webkit-transform: translateY(50px);
-    transform: translateY(50px); }
-
-#swipebox-slider.rightSpring {
-  animation: rightSpring 0.3s; }
-
-#swipebox-slider.leftSpring {
-  animation: leftSpring 0.3s; }
-
-@keyframes rightSpring {
-  0% {
-    margin-left: 0px; }
-
-  50% {
-    margin-left: -30px; }
-
-  100% {
-    margin-left: 0px; } }
-@keyframes leftSpring {
-  0% {
-    margin-left: 0px; }
-
-  50% {
-    margin-left: 30px; }
-
-  100% {
-    margin-left: 0px; } }
-@media screen and (max-width: 800px) {
-  #swipebox-action #swipebox-close {
-    left: 0; }
-
-  #swipebox-action #swipebox-prev {
-    right: 60px; }
-
-  #swipebox-action #swipebox-next {
-    right: 0; } }
-/* Skin 
---------------------------*/
-#swipebox-overlay {
-  background: #0d0d0d; }
-
-#swipebox-action,
-#swipebox-caption {
-  text-shadow: 1px 1px 1px black;
-  background-color: #0d0d0d;
-  background-color: #0d0d0d;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#0d0d0d), to(black));
-  background-image: -webkit-linear-gradient(top, #0d0d0d, black);
-  background-image: -moz-linear-gradient(top, #0d0d0d, black);
-  background-image: -o-linear-gradient(top, #0d0d0d, black);
-  background-image: linear-gradient(to bottom, #0d0d0d, black);
-  opacity: 0.95; }
-
-#swipebox-action {
-  border-top: 1px solid rgba(255, 255, 255, 0.2); }
-
-#swipebox-caption {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  color: white !important;
-  font-size: 15px;
-  line-height: 43px;
-  font-family: Helvetica, Arial, sans-serif; }
-
-#splash {
   height: 100%;
   background: #000;
-  text-align: center;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  will-change: opacity; }
+
+.pswp__scroll-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
-  position: fixed;
-  z-index: 99; }
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  will-change: transform; }
+
+.pswp__container, .pswp__zoom-wrap {
+  -ms-touch-action: none;
+  touch-action: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0; }
+
+/* Prevent selection and tap highlights */
+.pswp__container, .pswp__img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+      user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; }
+
+.pswp__zoom-wrap {
+  position: absolute;
+  width: 100%;
+  -webkit-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+  /* for open/close transition */
+  transition: -webkit-transform 333ms cubic-bezier(.4, 0, .22, 1);
+  transition: transform 333ms cubic-bezier(.4, 0, .22, 1); }
+
+.pswp__bg {
+  will-change: opacity;
+  /* for open/close transition */
+  transition: opacity 333ms cubic-bezier(.4, 0, .22, 1); }
+
+.pswp--animated-in .pswp__bg, .pswp--animated-in .pswp__zoom-wrap {
+  transition: none; }
+
+.pswp__container, .pswp__zoom-wrap {
+  -webkit-backface-visibility: hidden;
+  will-change: transform; }
+
+.pswp__item {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden; }
+
+.pswp__img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 0;
+  left: 0;
+  transition: opacity 0.15s; }
+
+/*
+	stretched thumbnail or div placeholder element (see below)
+	style is added to avoid flickering in webkit/blink when layers overlap
+*/
+.pswp__img--placeholder {
+  -webkit-backface-visibility: hidden; }
+
+/*
+	div element that matches size of large image
+	large image loads on top of it
+*/
+.pswp__img--placeholder--blank {
+  background: #222; }
+
+.pswp--ie .pswp__img {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
+/*
+	Error message appears when image is not loaded
+	(JS option errorMsg controls markup)
+*/
+.pswp__error-msg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: -8px;
+  color: #CCC; }
+
+.pswp__error-msg a {
+  color: #CCC;
+  text-decoration: underline; }
+
+#splash {
+
+  @-webkit-keyframes ball_moveG {
+    0% {
+      -webkit-transform: rotate(0deg); }
+
+    100% {
+      -webkit-transform: rotate(360deg); } }
+
+  @keyframes ball_moveG {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg); }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg); } }
+ }
   #splash span {
     font-size: 100px;
     vertical-align: middle; }
@@ -441,10 +444,6 @@ html.swipebox-html.swipebox-touch {
     width: 128px;
     height: 128px;
     border: 11px solid #FFFFFF;
-    -moz-border-radius: 128px;
-    -webkit-border-radius: 128px;
-    -ms-border-radius: 128px;
-    -o-border-radius: 128px;
     border-radius: 128px; }
   #splash .ball_holderG {
     position: absolute;
@@ -468,10 +467,14 @@ html.swipebox-html.swipebox-touch {
     -o-animation-duration: 1.3s;
     -o-animation-iteration-count: infinite;
     -o-animation-timing-function: linear;
-    animation-name: ball_moveG;
-    animation-duration: 1.3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear; }
+    -webkit-animation-name: ball_moveG;
+            animation-name: ball_moveG;
+    -webkit-animation-duration: 1.3s;
+            animation-duration: 1.3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear; }
   #splash .ballG {
     position: absolute;
     left: 0px;
@@ -479,36 +482,8 @@ html.swipebox-html.swipebox-touch {
     width: 51px;
     height: 51px;
     background: #F2F2F2;
-    -moz-border-radius: 43px;
-    -webkit-border-radius: 43px;
-    -ms-border-radius: 43px;
-    -o-border-radius: 43px;
     border-radius: 43px; }
-@-moz-keyframes ball_moveG {
-  #splash 0%  {
-    -moz-transform: rotate(0deg); }
-  #splash 100%  {
-    -moz-transform: rotate(360deg); } }
-@-webkit-keyframes ball_moveG {
-  #splash 0%  {
-    -webkit-transform: rotate(0deg); }
-  #splash 100%  {
-    -webkit-transform: rotate(360deg); } }
-@-ms-keyframes ball_moveG {
-  #splash 0%  {
-    -ms-transform: rotate(0deg); }
-  #splash 100%  {
-    -ms-transform: rotate(360deg); } }
-@-o-keyframes ball_moveG {
-  #splash 0%  {
-    -o-transform: rotate(0deg); }
-  #splash 100%  {
-    -o-transform: rotate(360deg); } }
-@keyframes ball_moveG {
-  #splash 0%  {
-    transform: rotate(0deg); }
-  #splash 100%  {
-    transform: rotate(360deg); } }
+
 header {
   height: 100%;
   background: url("../images/splash.jpg");
@@ -551,29 +526,21 @@ header {
       position: static;
       z-index: 1; } }
   .banner img {
-    transition: opacity 1s linear;
-    -moz-transition: opacity 1s;
-    -webkit-transition: opacity 1s;
-    transition: width opacity 1s;
-    backface-visibility: hidden;
+    transition: all opacity 1s;
     -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
     display: block;
     margin: 1.5em auto; }
     @media screen and (min-width: 1800px) {
       .banner img {
         max-width: 1800px; } }
   .banner img.active {
-    filter: filter: url('data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale');
     filter: none;
     /* IE6-9 */
     -webkit-filter: grayscale(0%);
     /* Chrome 19+, Safari 6+, Safari 6+ iOS */
     opacity: 1;
     transition: opacity 1s linear;
-    -moz-transition: opacity 1s;
-    -webkit-transition: opacity 1s;
     transition: opacity 1s; }
 
 body {
@@ -588,7 +555,7 @@ section {
   padding: 0;
   margin: 0 auto 0; }
   section .section-wrapper {
-    opacity: 0;
+    opacity: 1;
     transition: opacity .5s linear;
     -moz-transition: opacity .5s linear;
     -webkit-transition: opacity .5s linear; }
@@ -705,7 +672,7 @@ section {
           -moz-backface-visibility: hidden;
           -ms-backface-visibility: hidden; }
           .slides li img:hover {
-            filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale");
+            filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
             filter: none;
             /* IE6-9 */
             -webkit-filter: grayscale(0%);
@@ -739,15 +706,17 @@ section {
 
 @font-face {
   font-family: one;
-  src: url("../fonts/ostrich-sans-inline-italic.woff"); }
+  src: url('../fonts/ostrich-sans-inline-italic.woff'); }
+
 h1, h2, h3, h4 {
   margin: 0;
   padding: 0; }
 
 h1 {
-  visibility: hidden;
   height: 0;
-  width: 0; }
+  width: 0;
+  margin-left: -9999px;
+  visibility: hidden; }
 
 header h2 {
   visibility: visible;
@@ -867,24 +836,25 @@ footer {
       z-index: 1000; } }
 
 #soc-email {
-  background: url("../../images/sprites/soc-sprites.png") no-repeat 0 -2px;
+  background: url('../../images/sprites/soc-sprites.png') no-repeat 0 -2px;
   width: 59px;
   height: 55px; }
 
 #soc-flickr {
-  background: url("../../images/sprites/soc-sprites.png") no-repeat -62px -2px;
+  background: url('../../images/sprites/soc-sprites.png') no-repeat -62px -2px;
   width: 59px;
   height: 55px; }
 
 #soc-facebook {
-  background: url("../../images/sprites/soc-sprites.png") no-repeat -133px -3px;
+  background: url('../../images/sprites/soc-sprites.png') no-repeat -133px -3px;
   width: 56px;
   height: 53px; }
 
 #soc-500px {
-  background: url("../../images/sprites/soc-sprites.png") no-repeat -196px -3px;
+  background: url('../../images/sprites/soc-sprites.png') no-repeat -196px -3px;
   width: 59px;
   height: 55px;
   margin-right: 0; }
+
 
 /*# sourceMappingURL=main.css.map */
