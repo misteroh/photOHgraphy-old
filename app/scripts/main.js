@@ -194,6 +194,7 @@
                             callback: function() {
                                 if (i === numberOfCategories - 1) {
 									navLinkInit();
+                                    coordsUpdate();
 
 									$('#splash').remove();
                                 }

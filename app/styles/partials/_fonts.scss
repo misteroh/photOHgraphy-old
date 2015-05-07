@@ -60,7 +60,6 @@ a:link {
 			font-size: 140px;
 		}
 
-
 		@media screen and (min-width: $mobile-break) {
 			font-size: 240px;
 		}
@@ -71,6 +70,12 @@ a:link {
 
 		@media screen and (min-width: $ultrawide-break) {
 			font-size: 300px;
+//			transform: translate3d(-10em, 0, 0);
+			transition: 1s ease;
+
+			&.active {
+				transform: translate3d(0px,0,0px)
+			}
 		}
 	}
 }
