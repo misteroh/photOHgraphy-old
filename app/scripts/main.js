@@ -1,9 +1,6 @@
 (function main () {
     'use strict';
-	//what is this
-    //var global = {
-    //    handlebarsTemplateUrl: '../js-template/images-template.hbs'
-    //};
+
     var secCoords = [],
         navFix,
         offset = 400,
@@ -28,16 +25,9 @@
 
     function fadeIn(section) {
         if (section >= 0 && section <= 6) {
-            $($categories[section]).addClass('live');
-
-            for (var i = 0; i < 5; i++) {
-                if (i != section) {
-                    $($categories[i]).removeClass('live');
-                }
-            }
-        }
-
-        else {
+            $categories.removeClass('live');
+            $categories.eq(section).addClass('live');
+        } else {
             $categories.removeClass('live');
         }
     }
@@ -54,9 +44,9 @@
         });
     }
 
-	function navAdjust(section) { //fix the navbar to the top and highlight the correct section in the navbar or fix the section header to top if using mobile viewport.
+	function navAdjust(section, currentLoc) { //fix the navbar to the top and highlight the correct section in the navbar or fix the section header to top if using mobile viewport.
 		if ($(window).width() >= mobileView) {
-			if ($(window).scrollTop() >= secCoords[0]) {
+			if (currentLoc >= secCoords[0] + offset) {
                 nav.addClass('fixed');
 			} else {
                 nav.removeClass('fixed');
@@ -84,15 +74,14 @@
 	}
 
 	function coordsUpdate() {
-		var navFix;
-
 		secCoords.length = 0;
+
 		$categories.each(function() {
 			secCoords.push($(this).offset().top - offset);
 		});
-		navFix = secCoords[0] + offset;
-	}
 
+        sectionCounter();
+	}
 
 	function sectionCounter() { // counts which section the user is on based on scrollTop position
 		var currentLoc = $(window).scrollTop();
@@ -110,9 +99,7 @@
 			section = -1;
 		}
 
-        console.log(section);
-
-		navAdjust(section);
+		navAdjust(section, currentLoc);
 		fadeIn(section);
 	}
 
@@ -180,6 +167,62 @@
             var categories = $('section.category'),
                 numberOfCategories  = categories.length;
 
+            function endCallback(i) {
+                if (i === numberOfCategories - 1) {
+                    navLinkInit();
+                    coordsUpdate();
+
+                    $('.slides').each( function() {
+                        var $pic = $(this),
+                            getItems = function() {
+                                var items = [];
+                                $pic.find('a').each(function() {
+                                    var obj = $(this);
+
+                                    var href   = obj.attr('href'),
+                                        size   = obj.data('size').split('x'),
+                                        width  = size[0],
+                                        height = size[1];
+
+                                    var item = {
+                                        src : href,
+                                        w   : width,
+                                        h   : height
+                                    };
+
+                                    items.push(item);
+                                });
+                                return items;
+                            };
+
+                        var items = getItems();
+
+                        var $pswp = $('.pswp')[0];
+                        $pic.on('click', 'a', function(event) {
+                            event.preventDefault();
+
+                            var $index = $(this).index();
+                            var options = {
+                                index: $index,
+                                bgOpacity: 0.7,
+                                showHideOpacity: true
+                            }
+
+                            // Initialize PhotoSwipe
+                            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+                            lightBox.init();
+                        });
+                    });
+
+                    //$('#splash').remove();
+                    //$('.main').on('load', function() {
+                    //   var obj = template;
+                    //
+                    //    obj.addClass()
+                    //});
+                }
+            }
+
             getHandlebarsTemplate('js-template/images-template.hbs').done(function(template) {
                 categories.each(function(i) {
                     var obj = $(this),
@@ -192,12 +235,7 @@
                             json: json,
                             target: obj,
                             callback: function() {
-                                if (i === numberOfCategories - 1) {
-									navLinkInit();
-                                    coordsUpdate();
-
-									$('#splash').remove();
-                                }
+                                endCallback(i);
                             }
                         });
                     });
@@ -211,7 +249,6 @@
 
         $window.on('orientationchange resize', function() {
             coordsUpdate();
-            sectionCounter();
         });
 
         $window.on('scroll', function(){

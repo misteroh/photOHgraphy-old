@@ -50,7 +50,7 @@ a:link {
 		text-transform: lowercase;
 		line-height: 1em;
 		font-size: 80px;
-		padding: 0 0 .35em;
+		padding: 0.25em 0 0.5em;
 
 		@media screen and (min-width: 400px) {
 			font-size: 100px;
@@ -70,12 +70,6 @@ a:link {
 
 		@media screen and (min-width: $ultrawide-break) {
 			font-size: 300px;
-//			transform: translate3d(-10em, 0, 0);
-			transition: 1s ease;
-
-			&.active {
-				transform: translate3d(0px,0,0px)
-			}
 		}
 	}
 }

@@ -1,117 +1,168 @@
 {
-    "category" : "landscape",
-
-    "images" :
-    [
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20090704-0309.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20100120-9595.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20100719-2606.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20100730-.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20100731-3914.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20101019-7738.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110102-.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110123-2202.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110318-6851.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-6419.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-6640.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-6653.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-6667.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-6674.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110619-.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110806-.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110924-1683.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110924-.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20110926-1868.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20120929-6874.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20121228-9715.jpg",
-            "caption" : "caption"
-        },
-        {
-            "title" : "title",
-            "imagePath" : "AYO-20121229-9754.jpg",
-            "caption" : "caption"
-        }
-    ]
+  "category": "landscape",
+  "images": [
+    {
+      "title": "Title",
+      "src": "AYO-20090704-0309.jpg",
+      "width": 747,
+      "height": 1000
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20100120-9595.jpg",
+      "width": 660,
+      "height": 1000
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20100719-2606.jpg",
+      "width": 1000,
+      "height": 625
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20100730-.jpg",
+      "width": 998,
+      "height": 297
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20100731-3914.jpg",
+      "width": 1000,
+      "height": 667
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20101019-7738.jpg",
+      "width": 1000,
+      "height": 667
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110102-.jpg",
+      "width": 999,
+      "height": 426
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110123-2202.jpg",
+      "width": 1000,
+      "height": 667
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110318-6851.jpg",
+      "width": 667,
+      "height": 1000
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-.jpg",
+      "width": 999,
+      "height": 289
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-6419.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-6640.jpg",
+      "width": 999,
+      "height": 418
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-6653.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-6667.jpg",
+      "width": 662,
+      "height": 999
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110619-6674.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110806-.jpg",
+      "width": 1000,
+      "height": 283
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110924-.jpg",
+      "width": 999,
+      "height": 418
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110924-1683.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20110926-1868.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20120929-6874.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20121228-9715.jpg",
+      "width": 999,
+      "height": 662
+    },
+    {
+      "title": "Title",
+      "src": "AYO-20121229-9754.jpg",
+      "width": 999,
+      "height": 418
+    },
+    {
+      "title": "Title",
+      "src": "landscape1.jpg",
+      "width": 1200,
+      "height": 795
+    },
+    {
+      "title": "Title",
+      "src": "landscape2.jpg",
+      "width": 1200,
+      "height": 502
+    },
+    {
+      "title": "Title",
+      "src": "landscape3.jpg",
+      "width": 1200,
+      "height": 795
+    },
+    {
+      "title": "Title",
+      "src": "landscape4.jpg",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "title": "Title",
+      "src": "landscape5.jpg",
+      "caption": "Opening Day at Petco Park against the San Francisco Giants",
+      "width": 2000,
+      "height": 1500
+    }
+  ]
 }

@@ -2,11 +2,11 @@
         <div class="banner">
             <h2>{{category}}</h2>
         </div>
-        <ul class="slides clearfix">
+        <ul class="slides clearfix ">
         {{#images}}
             <li>
-                <a href="images/{{../category}}/{{imagePath}}" title="{{title}}">
-                    <img src="images/{{../category}}/thumb/{{imagePath}}" alt="{{title}} - {{caption}}">
+                <a href="images/{{../category}}/{{src}}" title="{{title}}" data-size="{{width}}x{{height}}">
+                    <img src="images/{{../category}}/thumb/{{src}}" alt="{{title}} - {{caption}}">
                 </a>
             </li>
         {{/images}}
