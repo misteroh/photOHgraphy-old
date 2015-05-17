@@ -10,7 +10,7 @@
         $window = $(window),
         $htmlBody = ('html, body'),
         nav,
-        $categories = $('section'),
+        categories,
         $content = $('#content-wrapper'),
         footer,
         jsonList = ['action', 'music', 'people', 'landscape'];
@@ -25,10 +25,10 @@
 
     function fadeIn(section) {
         if (section >= 0 && section <= 6) {
-            $categories.removeClass('live');
-            $categories.eq(section).addClass('live');
+            categories.removeClass('live');
+            categories.eq(section).addClass('live');
         } else {
-            $categories.removeClass('live');
+            categories.removeClass('live');
         }
     }
 
@@ -76,8 +76,11 @@
 	function coordsUpdate() {
 		secCoords.length = 0;
 
-		$categories.each(function() {
-			secCoords.push($(this).offset().top - offset);
+		categories.each(function() {
+            var obj = $(this),
+                sectionPosition = obj.offset().top - offset;
+
+			secCoords.push(sectionPosition);
 		});
 
         sectionCounter();
@@ -124,7 +127,7 @@
 
 		else {
 			if ($(window).scrollTop() >= secCoords[0]) { //don't want the navbar on top if using mobile viewport
-				$content.find('.top-fix').removeClass('top-fix').removeClass('top-fix');
+				$content.find('.top-fix').removeClass('top-fix');
 			}
 			else {
 				$nav.removeClass('fixed');
@@ -162,66 +165,12 @@
     $(document).ready(function() {
         nav = $('nav');
         footer = $('footer');
+        categories = $('section');
 
         (function initHandlebars() {
             var categories = $('section.category'),
-                numberOfCategories  = categories.length;
-
-            function endCallback(i) {
-                if (i === numberOfCategories - 1) {
-                    navLinkInit();
-                    coordsUpdate();
-
-                    $('.slides').each( function() {
-                        var $pic = $(this),
-                            getItems = function() {
-                                var items = [];
-                                $pic.find('a').each(function() {
-                                    var obj = $(this);
-
-                                    var href   = obj.attr('href'),
-                                        size   = obj.data('size').split('x'),
-                                        width  = size[0],
-                                        height = size[1];
-
-                                    var item = {
-                                        src : href,
-                                        w   : width,
-                                        h   : height
-                                    };
-
-                                    items.push(item);
-                                });
-                                return items;
-                            };
-
-                        var items = getItems();
-
-                        var $pswp = $('.pswp')[0];
-                        $pic.on('click', 'a', function(event) {
-                            event.preventDefault();
-
-                            var $index = $(this).index();
-                            var options = {
-                                index: $index,
-                                bgOpacity: 0.7,
-                                showHideOpacity: true
-                            }
-
-                            // Initialize PhotoSwipe
-                            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
-                            lightBox.init();
-                        });
-                    });
-
-                    //$('#splash').remove();
-                    //$('.main').on('load', function() {
-                    //   var obj = template;
-                    //
-                    //    obj.addClass()
-                    //});
-                }
-            }
+                numberOfCategories  = categories.length,
+                endCallback;
 
             getHandlebarsTemplate('js-template/images-template.hbs').done(function(template) {
                 categories.each(function(i) {
@@ -239,8 +188,67 @@
                             }
                         });
                     });
-                })
+                });
             });
+
+            endCallback = function(i) {
+                if (i === numberOfCategories - 1) {
+                    navLinkInit();
+
+                    $('img.thumb').on('load.thumb', function() {
+                        coordsUpdate();
+                    });
+
+                    $('.slides').each( function() {
+                        var $pic = $(this),
+                            getItems = function() {
+                                var items = [];
+                                $pic.find('a').each(function() {
+                                    var obj = $(this);
+
+                                    var href = obj.attr('href'),
+                                        size = obj.data('size').split('x'),
+                                        width = size[0],
+                                        height = size[1];
+
+                                    var item = {
+                                        src: href,
+                                        w: width,
+                                        h: height
+                                    };
+
+                                    items.push(item);
+                                });
+                                return items;
+                            };
+
+                        var items = getItems();
+                        var $pswp = $('.pswp')[0];
+
+                        $pic.on('click', 'a', function(event) {
+                            event.preventDefault();
+
+                            var $index = $(this).index();
+                            var options = {
+                                index: $index,
+                                bgOpacity: 0.7,
+                                showHideOpacity: true
+                            };
+
+                            // Initialize PhotoSwipe
+                            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+                            lightBox.init();
+                        });
+                    });
+
+                    //$('#splash').remove();
+                    //$('.main').on('load', function() {
+                    //   var obj = template;
+                    //
+                    //    obj.addClass()
+                    //});
+                }
+            };
         })();
 
         $window.on('load', function() {

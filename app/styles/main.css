@@ -767,9 +767,10 @@ header #quote-block p {
 
 a {
   color: #ccc; }
-
-a:link {
-  -webkit-tap-highlight-color: transparent; }
+  a:link {
+    -webkit-tap-highlight-color: transparent; }
+  a:focus {
+    outline: none; }
 
 .banner h2 {
   font-family: 'one';
