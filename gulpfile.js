@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     dive = require('dive'),
     jf = require('jsonfile'),
     sizeOf = require('image-size'),
-    Exif = require('exif').ExifImage;
+    Exif = require('exif').ExifImage,
+    Thumbnail = require('thumbnail'),
     $ = require('gulp-load-plugins')();
 
 require('natural-compare-lite');

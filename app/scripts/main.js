@@ -25,8 +25,8 @@
 
     function fadeIn(section) {
         if (section >= 0 && section <= 6) {
-            categories.removeClass('live');
             categories.eq(section).addClass('live');
+            categories.not(':eq(' + section + ')').removeClass('live');
         } else {
             categories.removeClass('live');
         }
@@ -53,8 +53,8 @@
 			}
 
 			if (section >= 0 && section <= 6) {
-                nav.find('a.active').removeClass('active');
-                nav.find('a:eq(' + section + ')').addClass('active');
+                nav.eq(section).addClass('active');
+                nav.not('a:eq(' + section + ')').removeClass('active');
 				$('img.active').removeClass('active');
 				//$($categories[section]).find('.banner img').addClass('active');
 			}
