@@ -3,7 +3,7 @@
 
     var secCoords = [],
         navFix,
-        offset = 400,
+        offset = 200,
         currentLoc,
         section,
         mobileView = 860,
@@ -39,13 +39,14 @@
                 targetHeight = target.offset().top;
 
             e.preventDefault();
-            nav.find('.active').removeClass('active');
             $($htmlBody).stop(true, true).animate({scrollTop: targetHeight}, 800);
         });
     }
 
 	function navAdjust(section, currentLoc) { //fix the navbar to the top and highlight the correct section in the navbar or fix the section header to top if using mobile viewport.
-		if ($(window).width() >= mobileView) {
+		var navLinks = $('nav').find('a');
+
+        if ($(window).width() >= mobileView) {
 			if (currentLoc >= secCoords[0] + offset) {
                 nav.addClass('fixed');
 			} else {
@@ -53,13 +54,12 @@
 			}
 
 			if (section >= 0 && section <= 6) {
-                nav.eq(section).addClass('active');
-                nav.not('a:eq(' + section + ')').removeClass('active');
-				$('img.active').removeClass('active');
+                navLinks.eq(section).addClass('active');
+                navLinks.not(':eq(' + section + ')').removeClass('active');
 				//$($categories[section]).find('.banner img').addClass('active');
 			}
 			else { //unfix navbar if user is on top of page or at bottom
-                nav.find('a.active').removeClass('active');
+                navLinks.removeClass('active');
 			}
 		}
 
@@ -169,8 +169,7 @@
 
         (function initHandlebars() {
             var categories = $('section.category'),
-                numberOfCategories  = categories.length,
-                endCallback;
+                numberOfCategories  = categories.length;
 
             getHandlebarsTemplate('js-template/images-template.hbs').done(function(template) {
                 categories.each(function(i) {
@@ -191,64 +190,64 @@
                 });
             });
 
-            endCallback = function(i) {
-                if (i === numberOfCategories - 1) {
-                    navLinkInit();
+            function endCallback(i) {
+                 if (i === numberOfCategories - 1) {
+                     navLinkInit();
 
-                    $('img.thumb').on('load.thumb', function() {
-                        coordsUpdate();
-                    });
+                     $('img.thumb').on('load.thumb', function() {
+                         coordsUpdate();
+                     });
 
-                    $('.slides').each( function() {
-                        var $pic = $(this),
-                            getItems = function() {
-                                var items = [];
-                                $pic.find('a').each(function() {
-                                    var obj = $(this);
+                     $('.slides').each( function() {
+                         var $pic = $(this),
+                             getItems = function() {
+                                 var items = [];
+                                 $pic.find('a').each(function() {
+                                     var obj = $(this);
 
-                                    var href = obj.attr('href'),
-                                        size = obj.data('size').split('x'),
-                                        width = size[0],
-                                        height = size[1];
+                                     var href = obj.attr('href'),
+                                         size = obj.data('size').split('x'),
+                                         width = size[0],
+                                         height = size[1];
 
-                                    var item = {
-                                        src: href,
-                                        w: width,
-                                        h: height
-                                    };
+                                     var item = {
+                                         src: href,
+                                         w: width,
+                                         h: height
+                                     };
 
-                                    items.push(item);
-                                });
-                                return items;
-                            };
+                                     items.push(item);
+                                 });
+                                 return items;
+                             };
 
-                        var items = getItems();
-                        var $pswp = $('.pswp')[0];
+                         var items = getItems();
+                         var $pswp = $('.pswp')[0];
 
-                        $pic.on('click', 'a', function(event) {
-                            event.preventDefault();
+                         $pic.on('click', 'a', function(e) {
+                             e.preventDefault();
 
-                            var $index = $(this).index();
-                            var options = {
-                                index: $index,
-                                bgOpacity: 0.7,
-                                showHideOpacity: true
-                            };
+                             var $index = $(this).index();
+                             var options = {
+                                 index: $index,
+                                 bgOpacity: 0.7,
+                                 showHideOpacity: true
+                             };
 
-                            // Initialize PhotoSwipe
-                            var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
-                            lightBox.init();
-                        });
-                    });
+                             // Initialize PhotoSwipe
+                             var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+                             lightBox.init();
+                         });
+                     });
 
-                    //$('#splash').remove();
-                    //$('.main').on('load', function() {
-                    //   var obj = template;
-                    //
-                    //    obj.addClass()
-                    //});
-                }
-            };
+                     //$('#splash').remove();
+                     //$('.main').on('load', function() {
+                     //   var obj = template;
+                     //
+                     //    obj.addClass()
+                     //});
+                 }
+            }
         })();
 
         $window.on('load', function() {
