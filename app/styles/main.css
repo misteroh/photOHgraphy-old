@@ -516,7 +516,12 @@ header {
   background: url("../images/splash.jpg");
   background-size: cover;
   background-repeat: no-repeat; }
-  header h1 {
+
+.headerCont {
+  width: 100%;
+  height: 100%;
+  position: relative; }
+  .headerCont h1 {
     position: absolute;
     margin-top: 11%;
     font-size: 6em;
@@ -526,21 +531,21 @@ header {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black; }
-  header h2 {
+  .headerCont h2 {
     line-height: 210px; }
-  header #banner {
-    display: block;
-    position: relative;
-    top: 40%;
-    width: 99%; }
-    @media screen and (min-width: 860px) {
-      header #banner {
-        top: 70%;
-        left: 5%;
-        width: 600px; } }
-    @media screen and (min-width: 1100px) {
-      header #banner {
-        width: 800px; } }
+
+#banner {
+  display: block;
+  position: absolute;
+  width: 99%; }
+  @media screen and (min-width: 860px) {
+    #banner {
+      bottom: 5%;
+      right: 5%;
+      width: 50%; } }
+  @media screen and (min-width: 1100px) {
+    #banner {
+      width: 800px; } }
 
 .banner {
   width: 100%;
@@ -599,6 +604,7 @@ section {
 
 #action {
   background-image: url("../images/action1.jpg");
+  background-position: bottom right;
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat; }
@@ -713,10 +719,11 @@ section {
             -moz-transition: opacity 0.5s linear;
             -webkit-transition: opacity 0.5s linear, -webkit-filter 500ms linear; } }
 
-#back-to-top {
+#backToTop {
   text-align: center; }
 
 #about-me {
+  padding: 0 0 5em;
   font-size: 1.2em; }
   #about-me p {
     margin: 0 0 1em; }
@@ -724,17 +731,15 @@ section {
     width: 80%;
     margin: 0 auto; }
   @media screen and (min-width: 550px) {
-    #about-me .col-container {
-      margin-bottom: 1em; }
-      #about-me .col-container #col-1 {
-        float: left;
-        width: 70%;
-        margin-right: 10%; }
-      #about-me .col-container #col-2 {
-        float: right;
-        width: 20%; }
-        #about-me .col-container #col-2 img {
-          width: 100%; } }
+    #about-me .col-container #col-1 {
+      float: left;
+      width: 70%;
+      margin-right: 10%; }
+    #about-me .col-container #col-2 {
+      float: right;
+      width: 20%; }
+      #about-me .col-container #col-2 img {
+        width: 100%; } }
 
 @font-face {
   font-family: one;
@@ -773,13 +778,13 @@ a {
     outline: none; }
 
 .banner h2 {
-  font-family: 'one';
+  font-family: 'Megrim', cursive;
   font-weight: normal;
   text-align: center;
   text-transform: lowercase;
   line-height: 1em;
-  font-size: 80px;
-  padding: 0.25em 0 0.5em; }
+  font-size: 5em;
+  padding: 0.5em 0 1em; }
   @media screen and (min-width: 400px) {
     .banner h2 {
       font-size: 100px; } }
@@ -815,24 +820,27 @@ nav {
   nav ul {
     list-style: none;
     margin: 0;
-    padding: 1em 1.25em 0 0;
+    padding: 0.5em 1.25em 0 0;
     text-align: right; }
   nav li a {
-    font-size: 38px;
-    line-height: 1.6em;
+    font-size: 4em;
+    line-height: 1.25em;
     color: #aeaeae;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.6);
     -webkit-tap-highlight-color: transparent;
-    text-transform: lowercase; }
+    text-transform: lowercase;
+    font-family: 'Wire One', sans-serif;
+    transition: color 0.25s ease; }
     @media screen and (min-width: 1400px) {
       nav li a {
-        font-size: 48px; } }
+        font-size: 5em; } }
   nav li a:hover {
-    color: #f1f1f1;
-    opacity: 1;
+    color: #fff;
     text-decoration: none; }
   nav li a.active {
     color: #f1f1f1; }
+    nav li a.active:hover {
+      color: #ffa600; }
   nav.fixed {
     position: fixed; }
 

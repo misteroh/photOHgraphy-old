@@ -1,4 +1,5 @@
 #about-me {
+	padding: 0 0 5em;
 	font-size: 1.2em;
 
 	p {
@@ -13,7 +14,6 @@
 	.col-container {
 
 		@media screen and (min-width: 550px) {
-			margin-bottom: 1em;
 
 			#col-1 {
 				float: left;

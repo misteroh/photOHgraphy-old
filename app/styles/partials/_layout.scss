@@ -38,6 +38,7 @@ section {
 
 #action {
 	background-image: url("../images/action1.jpg");
+	background-position: bottom right;
 	@include parallax;
 }
 
@@ -132,6 +133,6 @@ section {
 	}
 }
 
-#back-to-top {
+#backToTop{
 	text-align: center;
 }
