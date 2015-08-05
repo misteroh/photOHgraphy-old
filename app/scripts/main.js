@@ -227,7 +227,7 @@
                          $pic.on('click', 'a', function(e) {
                              e.preventDefault();
 
-                             var $index = $(this).index();
+                             var $index = $(this).parent().index();
                              var options = {
                                  index: $index,
                                  bgOpacity: 0.7,
