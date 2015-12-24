@@ -702,7 +702,7 @@ section {
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
       -ms-backface-visibility: hidden;
-      -webkit-transition: opacity 0.5s linear, -webkit-filter 500ms linear; }
+      -webkit-transition: opacity .5s linear, -webkit-filter 500ms linear; }
       @media screen and (min-width: 860px) {
         .slides li img {
           backface-visibility: hidden;
@@ -715,9 +715,9 @@ section {
             /* IE6-9 */
             -webkit-filter: grayscale(0%);
             opacity: 1;
-            transition: opacity 0.5s linear;
-            -moz-transition: opacity 0.5s linear;
-            -webkit-transition: opacity 0.5s linear, -webkit-filter 500ms linear; } }
+            transition: opacity .5s linear;
+            -moz-transition: opacity .5s linear;
+            -webkit-transition: opacity .5s linear, -webkit-filter 500ms linear; } }
 
 #backToTop {
   text-align: center; }
@@ -830,7 +830,7 @@ nav {
     -webkit-tap-highlight-color: transparent;
     text-transform: lowercase;
     font-family: 'Wire One', sans-serif;
-    transition: color 0.25s ease; }
+    transition: color .25s ease; }
     @media screen and (min-width: 1400px) {
       nav li a {
         font-size: 5em; } }
