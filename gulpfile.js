@@ -1,5 +1,5 @@
 //Dependancies
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     browserSync = require('browser-sync'),
     watch = require('gulp-watch'),
     fs = require('fs'),
