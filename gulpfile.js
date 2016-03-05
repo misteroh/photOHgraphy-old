@@ -184,6 +184,6 @@ gulp.task('browser-sync', function () {
     });
 });
 
-//gulp.task('default', ['sassWatcher']);
+gulp.task('default', ['watchSASS']);
 //gulp.task('buildHYR', ['buildHyrJs', 'buildHyrCss']);
 //gulp.task('watch', ['watchBase', 'watchSASS']);
