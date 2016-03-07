@@ -1,6 +1,6 @@
-@import "partials/boilerplate";
+@import "partials/boilerplate.scss";
 
-@import "../bower_components/photoswipe/src/css/main.scss";
+@import "../../node_modules/photoswipe/src/css/main.scss";
 
 @import "partials/base";
 
@@ -17,4 +17,3 @@
 @import "partials/navbar";
 
 @import "partials/footer";
-

@@ -184,6 +184,20 @@ gulp.task('browser-sync', function () {
     });
 });
 
-gulp.task('default', ['watchSASS']);
+gulp.task('build', function () {
+    gulp.src('app/index.html')
+        .pipe(gulp.dest('dist/'));
+
+    gulp.src('app/images/**/*')
+        .pipe(gulp.dest('dist/images/'));
+
+    gulp.src('app/js-template/**/*')
+        .pipe(gulp.dest('dist/js-template/'));
+
+    gulp.src('app/scripts/json/**/*')
+        .pipe(gulp.dest('dist/scripts/json/'));
+});
+
+gulp.task('default', ['build']);
 //gulp.task('buildHYR', ['buildHyrJs', 'buildHyrCss']);
 //gulp.task('watch', ['watchBase', 'watchSASS']);

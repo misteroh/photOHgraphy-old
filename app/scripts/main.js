@@ -1,19 +1,19 @@
 (function main () {
     'use strict';
 
-    var secCoords = [],
-        navFix,
-        offset = 200,
-        currentLoc,
-        section,
-        mobileView = 860,
-        $window = $(window),
-        $htmlBody = ('html, body'),
-        nav,
-        categories,
-        $content = $('#content-wrapper'),
-        footer,
-        jsonList = ['action', 'music', 'people', 'landscape'];
+    let secCoords = [];
+    let navFix;
+    let offset = 200;
+    let currentLoc;
+    let section;
+    let mobileView = 860;
+    let $window = $(window);
+    let $htmlBody = ('html, body');
+    let nav;
+    let categories;
+    let $content = $('#content-wrapper');
+    let footer;
+    let jsonList = ['action', 'music', 'people', 'landscape'];
 
     function loadScreen() {
         //$('#splash').fadeOut();

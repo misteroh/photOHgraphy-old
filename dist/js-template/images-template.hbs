@@ -1,0 +1,14 @@
+    <div class="section-wrapper">
+        <div class="banner">
+            <h2>{{category}}</h2>
+        </div>
+        <ul class="slides clearfix ">
+        {{#images}}
+            <li>
+                <a href="images/{{../category}}/{{src}}" title="{{title}}" data-size="{{width}}x{{height}}">
+                    <img class="thumb" src="images/{{../category}}/thumb/{{src}}" alt="{{title}} - {{caption}}">
+                </a>
+            </li>
+        {{/images}}
+        </ul>
+    </div>
