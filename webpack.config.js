@@ -1,13 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const VendorChunkPlugin = require('webpack-vendor-chunk-plugin');
 const ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
 
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'app/index.js'),
-        vendor: ['jquery', 'handlebars', 'photoswipe'],
+        vendor: ['jquery', 'handlebars', 'photoswipe']
       },
     output: {
         path: path.resolve(__dirname, 'dist/'),
@@ -49,9 +48,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('styles/main.css', {
-            allChunks: true
-        }),
+        //new ExtractTextPlugin('styles/main.css', {
+        //    allChunks: true
+        //}),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",

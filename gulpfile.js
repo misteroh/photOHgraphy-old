@@ -11,6 +11,8 @@ const gulp = require('gulp'),
     Thumbnail = require('thumbnail'),
     $ = require('gulp-load-plugins')();
 
+const webpack = require('webpack-stream');
+
 require('natural-compare-lite');
 
 //Helpers
@@ -182,6 +184,19 @@ gulp.task('browser-sync', function () {
             directory: true
         }
     });
+});
+
+gulp.task('watchWebpack', function () {
+    gulp.watch('app/styles/**/*.scss', function (cb) {
+        console.log('Webpacking...')
+
+        return gulp.src('app/index.js')
+            .pipe(webpack( require('./webpack.config.js') ))
+            .pipe(gulp.dest('dist/'))
+            .on('end', () => {
+                console.log('Webpacking done!');
+            });
+    })
 });
 
 gulp.task('build', function () {
